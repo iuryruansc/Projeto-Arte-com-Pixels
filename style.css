@@ -1,5 +1,6 @@
 #color-palette {
     display: flex;
+    margin-bottom: 15px;
 }
 
 .color {
@@ -11,4 +12,20 @@
 
 #button-random-color {
     margin-left: 50px;
+}
+
+#pixel-board {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.pixel {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+div {
+    margin-top: -2px;
 }
