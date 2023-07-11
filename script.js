@@ -1,7 +1,9 @@
-const randomColors = (event) => {
-    const palettes = document.querySelectorAll(".color");
-    let newArray = [];
+const board = document.querySelector('#pixel-board')
+const palettes = document.querySelectorAll(".color");
 
+
+const randomColors = (event) => {
+    let newArray = [];
     for (let index = 0; index < palettes.length; index++) {
         if (index > 0) {
             let red = Math.floor(Math.random() *256)
@@ -17,13 +19,30 @@ const randomColors = (event) => {
     }
 }
 
-window.onload = () => {
-    const colors = JSON.parse(localStorage.getItem('colorPalette'));
-    const palettes = document.querySelectorAll(".color");
-    for (let index = 1; index < palettes.length; index += 1) {
-        let cor = colors[index-1];
-        palettes[index].style.backgroundColor = cor;
+const bgColor = () => {
+    if (localStorage.getItem('colorPalette') === null) {
+        return;
+    } else {
+        const colors = JSON.parse(localStorage.getItem('colorPalette'));
+        const palettes = document.querySelectorAll(".color");
+        for (let index = 1; index < palettes.length; index += 1) {
+            let cor = colors[index-1];
+            palettes[index].style.backgroundColor = cor;
+        }
     }
+}
+
+const criaMatriz = () => {  
+    for (let i = 0; i < 5; i += 1) {
+        let newCell = document.createElement('div');
+        board.appendChild(newCell);
+        for (let j = 0; j < 5; j += 1) {
+            let newDiv = document.createElement('div');
+            newDiv.className = 'pixel';
+            newDiv.style.backgroundColor = 'white';
+            newCell.appendChild(newDiv);      
+        }
+    }   
 }
 
 const firstColor = document.querySelector("#color-palette").firstElementChild;
@@ -40,3 +59,8 @@ forthColor.style.backgroundColor = 'green';
 
 const buttonRandomColor = document.querySelector("#button-random-color");
 buttonRandomColor.addEventListener('click', randomColors)
+
+window.onload = () => {
+    criaMatriz();
+    bgColor();
+}
