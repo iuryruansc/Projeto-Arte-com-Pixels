@@ -92,7 +92,10 @@ const pixelColor = () => {
 const resetColor = () => {
     for (let index = 0; index < pixelBoard.length; index += 1) {
         pixelBoard[index].style.backgroundColor = 'white';
+        pixelRGB[index] = 'white';
     }
+    localStorage.setItem('pixelBoard', JSON.stringify(pixelRGB));
+
 }
 
 const buttonResetColor = document.querySelector('#clear-board');
