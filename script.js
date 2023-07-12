@@ -1,7 +1,7 @@
 const board = document.querySelector('#pixel-board');
 const palettes = document.querySelectorAll(".color");
 const pixelBoard = document.getElementsByClassName('pixel');
-const pixelRGB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+let pixelRGB = [];
 
 // função para gerar cores aleatórias para a paleta
 const randomColors = () => {
@@ -35,7 +35,8 @@ const bgColor = () => {
 }
 
 // função para criar a matriz de pixels
-const criaMatriz = (event) => {  
+const criaMatriz = () => {
+    if (localStorage.getItem('boardSize') === null) {  
     for (let i = 0; i < 5; i += 1) {
         let newCell = document.createElement('div');
         board.appendChild(newCell);
@@ -46,6 +47,9 @@ const criaMatriz = (event) => {
             newCell.appendChild(newDiv);      
         }
     }   
+    } else {
+        saveNewBoard();
+    }
 }
 
 // função para resetar os valores de cor e classe iniciais
@@ -73,19 +77,24 @@ const colorSelect = (event) => {
     
 }
 
+const saveBoard = () => {
+    for (let index = 0; index < pixelRGB.length; index += 1) {
+        const color = pixelBoard[index].style.backgroundColor;
+        pixelRGB[index] = color;
+    }
+    localStorage.setItem('pixelBoard', JSON.stringify(pixelRGB));
+}
+
 // função para mudar a cor dos pixels da matriz
 const pixelColor = () => {
     board.addEventListener('click', (event) => {
+        const pixelBoard = document.getElementsByClassName('pixel');
         if (event.target.className === 'pixel') {
             const selected = localStorage.getItem('selectedColor')
             event.target.style.backgroundColor = selected;
         }
-        for (let index = 0; index < pixelRGB.length; index += 1) {
-            const color = pixelBoard[index].style.backgroundColor;
-            pixelRGB[index] = color;
-        }
-        localStorage.setItem('pixelBoard', JSON.stringify(pixelRGB));
-    })
+        saveBoard();
+        })
 }
 
 // função para resetar as cores
@@ -100,6 +109,7 @@ const resetColor = () => {
 
 // função para salvar o desenho atual
 const saveDrawing = () => {
+    pixelRGB.length = pixelBoard.length;
     if (localStorage.getItem('pixelBoard') === null) {
         return;
     } else {
@@ -113,7 +123,8 @@ const saveDrawing = () => {
 
 // função para preencher novo quadro 
 const newBoard = () => {
-    const boardSize = parseInt(document.querySelector('#board-size').value);
+    let boardSize = parseInt(document.querySelector('#board-size').value);
+    boardSize = boardLimit(boardSize);
     const currentBoard = board.childNodes.length;
     if (isNaN(boardSize) || boardSize <= 0) {
         alert('Board inválido')
@@ -133,6 +144,40 @@ const newBoard = () => {
             }
         }   
     }
+    localStorage.setItem('boardSize', boardSize);
+    novaMatriz();
+}
+
+// função para limitar o tamanho do board
+const boardLimit = (event) => {
+    if (event < 5) {
+        event = 5; 
+    } else if (event > 50) {
+        event = 50;
+    }
+    return event;
+}
+
+// função para salvar o novo board
+const saveNewBoard = () => {
+    const newSize= localStorage.getItem('boardSize');
+    for (let i = 0; i < newSize; i += 1) {
+        let newCell = document.createElement('div');
+        board.appendChild(newCell);
+        for (let j = 0; j < newSize; j += 1) {
+            let newDiv = document.createElement('div');
+            newDiv.className = 'pixel';
+            newDiv.style.backgroundColor = 'white';
+            newCell.appendChild(newDiv);      
+        }
+    }   
+}
+
+const novaMatriz = () => {
+    console.log(pixelBoard.length);
+    pixelRGB.length = pixelBoard.length;
+    localStorage.setItem('pixelBoard', JSON.stringify(pixelRGB));
+    resetColor();
 }
 
 // adicionando eventos para os elementos 
