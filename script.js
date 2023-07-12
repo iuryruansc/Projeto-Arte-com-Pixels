@@ -1,5 +1,7 @@
 const board = document.querySelector('#pixel-board');
 const palettes = document.querySelectorAll(".color");
+const pixelBoard = document.getElementsByClassName('pixel');
+let pixelRGB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 
 // função para gerar cores aleatórias para a paleta
 const randomColors = () => {
@@ -25,7 +27,6 @@ const bgColor = () => {
         return;
     } else {
         const colors = JSON.parse(localStorage.getItem('colorPalette'));
-        const palettes = document.querySelectorAll(".color");
         for (let index = 1; index < palettes.length; index += 1) {
             let cor = colors[index-1];
             palettes[index].style.backgroundColor = cor;
@@ -74,13 +75,40 @@ const colorSelect = (event) => {
 
 // função para mudar a cor dos pixels da matriz
 const pixelColor = () => {
-    const pixelBoard = document.querySelector('#pixel-board');
-    pixelBoard.addEventListener('click', (event) => {
+    board.addEventListener('click', (event) => {
         if (event.target.className === 'pixel') {
             const selected = localStorage.getItem('selectedColor')
             event.target.style.backgroundColor = selected;
         }
+        for (let index = 0; index < pixelRGB.length; index += 1) {
+            const color = pixelBoard[index].style.backgroundColor;
+            pixelRGB[index] = color;
+        }
+        localStorage.setItem('pixelBoard', JSON.stringify(pixelRGB));
     })
+}
+
+// função para resetar as cores
+const resetColor = () => {
+    for (let index = 0; index < pixelBoard.length; index += 1) {
+        pixelBoard[index].style.backgroundColor = 'white';
+    }
+}
+
+const buttonResetColor = document.querySelector('#clear-board');
+buttonResetColor.addEventListener('click', resetColor);
+
+// função para salvar o desenho atual
+const saveDrawing = () => {
+    if (localStorage.getItem('pixelBoard') === null) {
+        return;
+    } else {
+        const pixelBG = JSON.parse(localStorage.getItem('pixelBoard'));
+        for (let index = 0; index < pixelRGB.length; index += 1) {
+          const bg = pixelBG[index];
+          pixelBoard[index].style.backgroundColor = bg;  
+        }
+    }
 }
 
 // adicionando eventos para a paleta de cores
@@ -106,8 +134,9 @@ buttonRandomColor.addEventListener('click', randomColors)
 
 // funções iniciadas ao carregar a página
 window.onload = () => {
+    criaMatriz();
     pixelColor();
     initalColor();
-    criaMatriz();
     bgColor();
+    saveDrawing();
 }
