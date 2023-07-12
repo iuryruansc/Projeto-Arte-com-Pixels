@@ -15,8 +15,8 @@
 }
 
 #pixel-board {
-    display: inline-block;
     margin-left: 10px;
+    display: inline-block;
 }
 
 .pixel {
@@ -24,8 +24,11 @@
     height: 100px;
     width: 100px;
     border: 1px solid black;
+    margin-bottom: -4px;
 }
 
-div {
-    margin-top: -2px;
+#clear-board {
+    display: flex;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
