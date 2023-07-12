@@ -1,7 +1,7 @@
 const board = document.querySelector('#pixel-board');
 const palettes = document.querySelectorAll(".color");
 const pixelBoard = document.getElementsByClassName('pixel');
-let pixelRGB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+const pixelRGB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 
 // função para gerar cores aleatórias para a paleta
 const randomColors = () => {
@@ -35,7 +35,7 @@ const bgColor = () => {
 }
 
 // função para criar a matriz de pixels
-const criaMatriz = () => {  
+const criaMatriz = (event) => {  
     for (let i = 0; i < 5; i += 1) {
         let newCell = document.createElement('div');
         board.appendChild(newCell);
@@ -98,9 +98,6 @@ const resetColor = () => {
 
 }
 
-const buttonResetColor = document.querySelector('#clear-board');
-buttonResetColor.addEventListener('click', resetColor);
-
 // função para salvar o desenho atual
 const saveDrawing = () => {
     if (localStorage.getItem('pixelBoard') === null) {
@@ -114,7 +111,31 @@ const saveDrawing = () => {
     }
 }
 
-// adicionando eventos para a paleta de cores
+// função para preencher novo quadro 
+const newBoard = () => {
+    const boardSize = parseInt(document.querySelector('#board-size').value);
+    const currentBoard = board.childNodes.length;
+    if (isNaN(boardSize) || boardSize <= 0) {
+        alert('Board inválido')
+    } else {
+        for (let index = 0; index < currentBoard; index += 1) {
+            const row = board.firstElementChild;
+            board.removeChild(row);
+        }
+        for (let i = 0; i < boardSize; i += 1) {
+            let newCell = document.createElement('div');
+            board.appendChild(newCell);
+            for (let j = 0; j < boardSize; j += 1) {
+                let newDiv = document.createElement('div');
+                newDiv.className = 'pixel';
+                newDiv.style.backgroundColor = 'white';
+                newCell.appendChild(newDiv);      
+            }
+        }   
+    }
+}
+
+// adicionando eventos para os elementos 
 const firstColor = document.querySelector("#color-palette").firstElementChild;
 firstColor.style.backgroundColor = 'black';
 firstColor.addEventListener('click', colorSelect);
@@ -131,9 +152,14 @@ const forthColor = thirdColor.nextElementSibling;
 forthColor.style.backgroundColor = 'green';
 forthColor.addEventListener('click', colorSelect);
 
-// adicionando um evento para o botão de cores
+const buttonResetColor = document.querySelector('#clear-board');
+buttonResetColor.addEventListener('click', resetColor);
+
 const buttonRandomColor = document.querySelector("#button-random-color");
-buttonRandomColor.addEventListener('click', randomColors)
+buttonRandomColor.addEventListener('click', randomColors);
+
+const buttonNewBoard = document.querySelector('#generate-board');
+buttonNewBoard.addEventListener('click', newBoard);
 
 // funções iniciadas ao carregar a página
 window.onload = () => {
