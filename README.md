@@ -2,49 +2,9 @@
 
 Para realizar o projeto, atente-se a cada passo descrito a seguir, e se tiver qualquer dúvida, nos envie por Slack! #vqv :rocket:
 
-Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu projeto a partir desse repositório, utilizando uma branch específica e um _Pull Request_ para colocar seus códigos.
-
 # Termos e acordos
 
 Ao iniciar este projeto, você concorda com as diretrizes do [Código de Conduta e do Manual da Pessoa Estudante da Trybe](https://app.betrybe.com/manual-estudante/codigo-de-etica-e-conduta).
-
-# Entregáveis
-
-<details>
-  <summary><strong>🤷🏽‍♀️ Como entregar</strong></summary><br />
-
-  Para entregar o seu projeto você deverá criar um *Pull Request* neste repositório.
-
-  Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://app.betrybe.com/course/4d67f5b4-34a6-489f-a205-b6c7dc50fc16/) e nosso [Blog - Git & GitHub](https://blog.betrybe.com/tecnologia/git-e-github/) sempre que precisar!
-</details>
-
-<details>
-  <summary><strong>👨‍💻 O que deverá ser desenvolvido</strong></summary><br />
-
-
-Neste projeto, você vai implementar um editor de arte com pixels em que a pessoa usuária poderá escolher uma cor em uma paleta de cores e poderá pintar o que quiser em um quadro branco 🎨 🧑‍🎨
-
-
-💡 Veja o exemplo a seguir de como o projeto pode se parecer depois de pronto. 
-
-![exemplo de arte com pixels](./art-with-pixels.gif)
-
-Você pode ~~e deve~~ ir além para deixar o projeto com a sua cara e impressionar todas as pessoas, mas não deixe de cumprir os requisitos! 
-
-
-</details>
-
-<details>
-  <summary><strong>🗓 Data de Entrega</strong></summary><br />
-  
-  * Este projeto é individual;
-  * Serão `2` dias de projeto;
-  * Data para entrega final do projeto: `16/01/2023 14:00`.
-  * Data para entrega em recuperação do projeto: `30/01/2023`.
-
-</details>
-
-# Orientações
 
 <details>
   <summary><strong>‼️ Antes de começar a desenvolver</strong></summary><br />
