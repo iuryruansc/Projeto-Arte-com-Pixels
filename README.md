@@ -1,7 +1,16 @@
 # Boas-vindas ao repositório do projeto Arte com Pixels!
 
-Para realizar o projeto, atente-se a cada passo descrito a seguir, e se tiver qualquer dúvida, nos envie por Slack! #vqv :rocket:
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
+<ul>
+  <li>HTML e CSS</li>
+  <li>JavaScript</li>
+</ul>
+
+Visite o projeto online:
+<ul>
+  <li>https://iuryruansc.github.io/Projeto-Arte-com-Pixels/</li>
+</ul>
 # Termos e acordos
 
 Ao iniciar este projeto, você concorda com as diretrizes do [Código de Conduta e do Manual da Pessoa Estudante da Trybe](https://app.betrybe.com/manual-estudante/codigo-de-etica-e-conduta).
